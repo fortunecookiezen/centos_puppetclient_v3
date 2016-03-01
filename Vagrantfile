@@ -68,6 +68,7 @@ Vagrant.configure(2) do |config|
      sudo rpm -i https://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
      sudo yum -y install puppet
      sudo yum -y install ruby
+     sudo yum -y install mailx
      mkdir -p -m 755 /etc/facter/facts.d
      echo "role=web" > /etc/facter/facts.d/role.txt
      cp /vagrant/files/vimrc /root/.vimrc

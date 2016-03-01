@@ -66,9 +66,10 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
      sudo rpm -i https://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
-     sudo yum -y install puppet-agent
+     sudo yum -y install puppet
      sudo yum -y install ruby
-     echo "role=web" > /opt/puppetlabs/facter/facts.d/role.txt
+     mkdir -p -m 755 /etc/facter/facts.d
+     echo "role=web" > /etc/facter/facts.d/role.txt
      cp /vagrant/files/vimrc /root/.vimrc
      cp /vagrant/files/vimrc /home/vagrant/.vimrc
    SHELL

@@ -22,7 +22,7 @@ Vagrant.configure(2) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -73,5 +73,15 @@ Vagrant.configure(2) do |config|
      echo "role=web" > /etc/facter/facts.d/role.txt
      cp /vagrant/files/vimrc /root/.vimrc
      cp /vagrant/files/vimrc /home/vagrant/.vimrc
+     cp /vagrant/files/hiera.yaml /etc/hiera.yaml
+     cp /vagrant/files/consul.yaml /var/lib/hiera/consul.yaml 
    SHELL
+  config.vm.provision :puppet do |puppet|
+    puppet.module_path = "modules"
+    puppet.options = [ '--verbose']
+  end
+  #config.vm.provision "shell", inline: <<-SHELL
+  #  rpm -i /vagrant/tomcat7/tomcat7-*.rpm
+  #  SHELL
 end
+
